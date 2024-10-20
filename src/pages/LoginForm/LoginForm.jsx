@@ -43,7 +43,7 @@ function LoginForm() {
       navigate("/");
     } catch (error) {
       console.log(error.stack);
-        setError(error.response.data.msg);
+        setError(error?.response?.data?.msg);
         console.log(error)
     }
   };

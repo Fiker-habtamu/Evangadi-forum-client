@@ -28,7 +28,7 @@ const AuthWrapper = ({ setAuth }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("User data:", data);
+      // console.log("User data:", data);
       setUser(data);
     } catch (err) {
       console.log(err);

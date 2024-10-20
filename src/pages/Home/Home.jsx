@@ -25,7 +25,7 @@ function Home() {
         },
       });
       setQuestions(request.data);
-      console.log(request)
+      // console.log(request)
     } catch (error) {
       alert("Something went wrong while fetching questions.");
       console.error("Error fetching data:", error);
@@ -56,7 +56,7 @@ function Home() {
     const updatedItems = questions.filter((question) => {
       return question.title.toLowerCase().includes(searchTerm);
     });
-    console.log(updatedItems)
+    // console.log(updatedItems)
     setFilteredItems(updatedItems); // Update the filtered list
 
   }, [searchTerm, questions]); // Only run this effect when searchTerm or questions change
