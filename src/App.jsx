@@ -44,7 +44,7 @@ const AuthWrapper = ({ setAuth }) => {
 };
 
 function App() {
-   const [isAuthenticated, setIsAuthenticated] = useState(null); // null indicates auth status is still being checked
+   const [isAuthenticated, setIsAuthenticated] = useState([]); // null indicates auth status is still being checked
    const [loading, setLoading] = useState(true); // Add loading state
 
    useEffect(() => {

@@ -42,7 +42,7 @@ function RgisterForm() {
       // alert("Registered Successfully!");
       navigate("/login");
     } catch (error) {
-      alert("Something went wrong");
+      // alert("Something went wrong");
       console.log(error);
       setError(error.response.data.msg);
 
