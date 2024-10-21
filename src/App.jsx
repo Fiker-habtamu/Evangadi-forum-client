@@ -44,56 +44,66 @@ const AuthWrapper = ({ setAuth }) => {
 };
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+   const [isAuthenticated, setIsAuthenticated] = useState(null); // null indicates auth status is still being checked
+   const [loading, setLoading] = useState(true); // Add loading state
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsAuthenticated(true);
-    }
-  }, []);
+   useEffect(() => {
+     const token = localStorage.getItem("token");
+     if (token) {
+       setIsAuthenticated(true);
+     } else {
+       setIsAuthenticated(false);
+     }
+     setLoading(false); // Stop loading once the token check is done
+   }, []);
 
-  return (
-    <EditProvider>
-      <Router>
-        <Header />
-        {/* AuthWrapper handles token validation on page load */}
-        <AuthWrapper setAuth={setIsAuthenticated} />
+   if (loading) {
+     return <div>Loading...</div>; // Return loading UI while authentication is being checked
+   }
 
-        <Routes>
-          {/* Public routes */}
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/register" element={<RgisterForm />} />
-          {/* Protected routes */}
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute isAuthenticated={isAuthenticated}>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/ask"
-            element={
-              <ProtectedRoute isAuthenticated={isAuthenticated}>
-                <AskQuestionPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/answers/:question_id"
-            element={
-              <ProtectedRoute isAuthenticated={isAuthenticated}>
-                <AnswerPage />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-        <Footer />
-      </Router>
-    </EditProvider>
-  );
+   return (
+     <EditProvider>
+       <Router>
+         <Header />
+         {/* AuthWrapper handles token validation on page load */}
+         <AuthWrapper setAuth={setIsAuthenticated} />
+
+         <Routes>
+           {/* Public routes */}
+           <Route path="/login" element={<LoginForm />} />
+           <Route path="/register" element={<RgisterForm />} />
+
+           {/* Protected routes */}
+           <Route
+             path="/"
+             element={
+               <ProtectedRoute isAuthenticated={isAuthenticated}>
+                 <Home />
+               </ProtectedRoute>
+             }
+           />
+           <Route
+             path="/ask"
+             element={
+               <ProtectedRoute isAuthenticated={isAuthenticated}>
+                 <AskQuestionPage />
+               </ProtectedRoute>
+             }
+           />
+           <Route
+             path="/answers/:question_id"
+             element={
+               <ProtectedRoute isAuthenticated={isAuthenticated}>
+                 <AnswerPage />
+               </ProtectedRoute>
+             }
+           />
+         </Routes>
+         <Footer />
+       </Router>
+     </EditProvider>
+   );
+
 }
 
 export default App;

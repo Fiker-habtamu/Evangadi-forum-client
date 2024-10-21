@@ -11,15 +11,15 @@ function LoginForm() {
   const passwordDom = useRef();
   const [error, setError] = useState("");
 
-
   useEffect(() => {
+    // Ensure the token check only runs when component mounts or 'navigate' changes
     if (localStorage.getItem("token")) {
       navigate("/");
     }
-  }, []);
+  }, [navigate]); // Include 'navigate' as a dependency to avoid infinite loops
 
   const handleSubmit = async (e) => {
-        setError("");
+    setError("");
     e.preventDefault();
     const email = emailDom.current.value;
     const password = passwordDom.current.value;
@@ -40,11 +40,11 @@ function LoginForm() {
       };
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(user));
-      navigate("/");
+      navigate("/"); // Redirect to the home page after successful login
     } catch (error) {
       console.log(error.stack);
-        setError(error?.response?.data?.msg);
-        console.log(error)
+      setError(error?.response?.data?.msg || "Login failed");
+      console.log(error);
     }
   };
 

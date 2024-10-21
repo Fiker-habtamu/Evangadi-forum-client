@@ -6,7 +6,7 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 function AnswerCard({ answer }) {
-  console.log(answer);
+  // console.log(answer);
 
   return (
     <div className={classes.question__container}>
