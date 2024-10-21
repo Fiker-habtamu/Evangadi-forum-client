@@ -8,7 +8,7 @@ import { FaRegEdit } from "react-icons/fa";
 import EditContext from "../../context/EditContext";
 
 function QuestionCard({ question }) {
-  const { updateEditState, updateQuestion } = useContext(EditContext);
+  // const { updateEditState, updateQuestion } = useContext(EditContext);
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
 

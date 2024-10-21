@@ -14,7 +14,7 @@ function Home() {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
-  const { edit, updateEditState } = useContext(EditContext);
+  // const { edit, updateEditState } = useContext(EditContext);
 
   const getQuestion = async () => {
     try {
@@ -87,7 +87,7 @@ function Home() {
           <QuestionCard key={question.question_id} question={question} /> // Use unique key prop
         ))
       )}
-      {edit && <EditQuestionPopup onClose={() => updateEditState(false)} />}
+      {/* {edit && <EditQuestionPopup onClose={() => updateEditState(false)} />} */}
     </div>
   );
 }
